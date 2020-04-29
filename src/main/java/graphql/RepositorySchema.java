@@ -27,15 +27,15 @@ public class RepositorySchema {
 
     public Object execute(String queryString) {
         Object returnData;
-
         if (!isIntrospectionQuery(queryString)) {
-            returnData = graphQL.execute(queryString,query).getData();
+            returnData = graphQL.execute(queryString, query).getData();
         } else {
-            Map<String, Object> result = new HashMap<>();
-            result.put("data", graphQL.execute(queryString).getData());
-            returnData = result;
+            returnData = graphQL.execute(queryString).getData();
         }
-        return returnData;
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", returnData);
+        return result;
     }
 
     private GraphQL createGraphQLSchema() throws IllegalAccessException, InstantiationException, NoSuchMethodException {
